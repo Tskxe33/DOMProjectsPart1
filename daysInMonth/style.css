@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap");
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  text-align: center;
+  height: 100vh;
+  color: #777;
+  line-height: 1.7;
+  background-color: rgb(248, 248, 248);
+  margin-top: 10rem;
+}
+
+.heading {
+  font-size: 3rem;
+  font-weight: 300;
+  margin-bottom: 3rem;
+}
+
+.paragraph__result {
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin-top: 5rem;
+  display: none;
+}
+
+.form__input {
+  font-size: 2rem;
+  padding: 0.6rem 3rem;
+  margin: 0 3rem;
+  border-radius: 4px;
+  border: none;
+  color: #777;
+  border: 1px solid #ff7730;
+  transition: all 0.4s;
+}
+
+.form__input:focus {
+  outline: none;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.form__btn {
+  font-size: 2rem;
+  padding: 0.7rem 1.2rem;
+  background-color: #fff;
+  border: none;
+  background-color: #ff7730;
+  color: #fff;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.form__btn:hover {
+  outline: none;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}

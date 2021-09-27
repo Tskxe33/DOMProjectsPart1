@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Calculator</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="container__heading">Fahrenheit to Celsius</h2>
+      <span class="container__formula">formula</span>
+      <span class="container__paragraph"> (°F − 32) × 5/9 </span>
+    </div>
+
+    <form method="GET" action="" class="form">
+      <input
+        type="number"
+        id="fahrenheit"
+        class="form__input"
+        placeholder="Fahrenheit"
+      />
+      <button type="submit" class="form__btn">=</button>
+      <input
+        type="text"
+        id="celsius"
+        readonly
+        class="form__input"
+        placeholder="Celsius"
+      />
+    </form>
+    <script src="index.js"></script>
+  </body>
+</html>

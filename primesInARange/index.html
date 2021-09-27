@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Contact Form</title>
+  </head>
+  <body>
+    <div class="container">
+      <form method="POST" action="/users" class="form">
+        <p class="form__paragraph">Primes numbers in a range</p>
+        <label class="form__label">First number:</label>
+        <div class="form__group">
+          <i class="fas fa-list-ol form__icons fa-2x form__icons"></i>
+          <input type="number" id="firstNumber" class="form__input" />
+        </div>
+
+        <label class="form__label">Second number:</label>
+        <div class="form__group">
+          <i class="fas fa-list-ol fa-2x form__icons"></i>
+          <input type="number" id="secondNumber" class="form__input" />
+        </div>
+
+        <button type="submit" class="btn">Show numbers</button>
+      </form>
+      <lo class="form__result form__label"></lo>
+    </div>
+
+    <script src="script.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/287f8d32d2.js"
+      crossorigin="anonymous"
+      defer
+    ></script>
+  </body>
+</html>

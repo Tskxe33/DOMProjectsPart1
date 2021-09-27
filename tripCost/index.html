@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Contact Form</title>
+  </head>
+  <body>
+    <div class="container">
+      <form method="POST" action="/users" class="form">
+        <p class="form__paragraph">Trip Cost</p>
+        <label class="form__label">Driving distance in km:</label>
+        <div class="form__group">
+          <i class="fas fa-car form__icons fa-2x form__icons"></i>
+          <input type="number" id="distance" class="form__input" />
+        </div>
+
+        <label class="form__label">Average fuel consumption per 100km:</label>
+        <div class="form__group">
+          <i class="fas fa-road fa-2x form__icons"></i>
+
+          <input type="number" id="consumption" class="form__input" />
+        </div>
+        <label class="form__label">Fuel price per liter:</label>
+        <div class="form__group">
+          <i class="fas fa-gas-pump fa-2x form__icons"></i>
+          <input type="number" id="fuelPrice" class="form__input" />
+        </div>
+        <p class="form__result form__label">Trip Cost</p>
+
+        <button type="submit" class="btn">Calcucate</button>
+      </form>
+    </div>
+
+    <script src="script.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/287f8d32d2.js"
+      crossorigin="anonymous"
+      defer
+    ></script>
+  </body>
+</html>

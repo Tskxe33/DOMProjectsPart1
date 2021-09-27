@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Contact Form</title>
+  </head>
+  <body>
+    <form method="POST" action="/users" class="form">
+      <div class="form__group">
+        <label for="name" class="form__label">Name:</label>
+        <input type="text" id="name" name="name" class="form__input" />
+      </div>
+      <div class="form__group">
+        <label for="surname" class="form__label">Surname:</label>
+        <input type="text" id="surname" name="surname" class="form__input" />
+      </div>
+      <div class="form__group">
+        <label for="dob" class="form__label">Date of birth:</label>
+        <input type="date" id="dob" name="dob" class="form__input" />
+      </div>
+      <button type="submit" class="btn">Save</button>
+      <p class="form__message"></p>
+    </form>
+
+    <script src="script.js"></script>
+  </body>
+</html>
