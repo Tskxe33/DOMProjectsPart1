@@ -36,6 +36,8 @@ body {
   padding: 2rem 3rem;
   display: flex;
   align-items: flex-start;
+  position: absolute;
+  left: 50%;
 }
 
 .form {

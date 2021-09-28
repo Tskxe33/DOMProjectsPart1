@@ -20,6 +20,6 @@ form.addEventListener("submit", function (event) {
     consumptionPer100.value
   );
 
-  result.textContent = `the price of a potential car trip is: ${value}$`;
+  result.textContent = `the price of a potential car trip is: ${value}`;
   result.style.display = "block";
 });
