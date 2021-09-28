@@ -14,21 +14,31 @@ function isPrime(num) {
 }
 
 function primeBetween(min, max) {
-  const resultList = document.querySelector(".form__result");
+  const list = [];
 
   for (let i = min.value; i <= max.value; ++i) {
     if (isPrime(i)) {
-      let li = document.createElement("li");
-      let resultText = document.createTextNode(i);
-      li.appendChild(resultText);
-      resultList.appendChild(li);
+      list.push(i);
     }
+  }
+  return list;
+}
+
+function showPrimes() {
+  const firstNumber = document.getElementById("firstNumber");
+  const secondNumber = document.getElementById("secondNumber");
+  const resultList = document.querySelector(".form__result");
+  const list = primeBetween(firstNumber, secondNumber);
+
+  for (let i = 0; i < list.length; ++i) {
+    let li = document.createElement("li");
+    let resultText = document.createTextNode(list[i]);
+    li.appendChild(resultText);
+    resultList.appendChild(li);
   }
 }
 
 form.addEventListener("submit", function (event) {
-  const firstNumber = document.getElementById("firstNumber");
-  const secondNumber = document.getElementById("secondNumber");
   event.preventDefault();
-  primeBetween(firstNumber, secondNumber);
+  showPrimes();
 });
