@@ -16,13 +16,15 @@ form.addEventListener("submit", function (event) {
 
   event.preventDefault();
 
-  message.style.display = "block";
-  message.textContent = `
-  successfully sent!
-  Name: ${firstName.value};
-  Surname: ${surname.value};
-  Date Of Birth: ${dob.value};
-  `;
+  // message.style.display = "block";
+  // message.textContent = `
+  // successfully sent!
+  // Name: ${firstName.value};
+  // Surname: ${surname.value};
+  // Date Of Birth: ${dob.value};
+  // `;
+
+  window.location =`information.html?firstName=${firstName.value}&surname=${surname.value}&date=${dob.value}`;
 
   init();
 });
