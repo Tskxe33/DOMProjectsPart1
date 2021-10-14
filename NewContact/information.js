@@ -1,13 +1,15 @@
-const query = new URLSearchParams(location.search)
-const div = document.querySelector('.info');
-const firstName = document.createElement('p')
-const surname = document.createElement('p')
-const date = document.createElement('p')
+const query = new URLSearchParams(location.search);
+let FirstName = query.get('Name');
+if(FirstName){
+    FirstName = FirstName.trim();
+}
+const dob = query.get('Dob');
+const surname = query.get('Surname');
 
-firstName.textContent = `First name: ${query.get('firstName')}`
-surname.textContent = `Surname: ${query.get('surname')}`
-date.textContent = `Date: ${query.get('date')}`
+const message = `
+First Name: ${FirstName},
+Surname: ${surname},
+Date of Birth: ${dob}
+`
 
-div.appendChild(firstName)
-div.appendChild(surname)
-div.appendChild(date)
+document.querySelector('.form__message').innerHTML = message;
