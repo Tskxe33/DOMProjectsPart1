@@ -11,11 +11,16 @@ html {
 }
 
 body {
+  background-image: linear-gradient(#06beb6, #48b1bf);
   font-family: "Lato", sans-serif;
-  color: #777;
+  color: #fff;
   font-weight: 400;
   line-height: 1.7;
-  background-color: #ececec;
+  height: 100vh;
+}
+
+.hidden {
+  display: none;
 }
 
 .form {
@@ -24,13 +29,24 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 38%;
+  width: 30%;
+}
+
+.form__label {
+  font-size: 2.4rem;
+  font-weight: 300;
+  word-spacing: 0.2rem;
+  letter-spacing: 0.18rem;
 }
 
 .form__input {
+  font-size: 2rem;
+  color: #777;
   padding: 1rem 2rem;
   display: block;
   border: none;
+  border-radius: 50rem;
+  outline: none;
   margin: 1rem 0;
   width: 100%;
 }
@@ -42,11 +58,37 @@ body {
 }
 
 .btn {
-  font-size: 1.6rem;
-  background-color: #55c57a;
+  font-size: 2rem;
+  background-color: #34495e;
   color: #fff;
   border: none;
-  border-radius: 10px;
+  border-radius: 50rem;
   padding: 1rem 2rem;
   margin-top: 1.5rem;
+}
+
+/* --------------- INFORMATION ------------------ */
+
+.info {
+  background-image: linear-gradient(#06beb6, #48b1bf);
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  color: #fff;
+}
+
+.info__heading {
+  font-size: 4rem;
+  margin-top: -30rem;
+  margin-bottom: 2rem;
+}
+
+.info__name,
+.info__surname,
+.info__dob,
+.info__numOfSave {
+  font-size: 2.4rem;
 }
