@@ -2,29 +2,40 @@
 
 const form = document.querySelector(".form");
 
-function init() {
-  firstName.value = "";
-  surname.value = "";
-  dob.value = "";
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const formElements = event.target.elements;
+  const query = new URLSearchParams();
+  
+  query.set('Name', `${formElements[`name`].value}`)
+  query.set('Surname', `${formElements[`surname`].value}`)
+  query.set('Dob', `${formElements[`dob`].value}`)
+  
+  location = `information.html?${query}`
+});
+
+
+function browserlanguage(){
+  const name = document.querySelector('.name');
+  const surname = document.querySelector('.surname');
+  const dob = document.querySelector('.dob');
+  const btn = document.querySelector('.btn');
+  const language = navigator.language;
+  console.log(language === `sr`);
+  console.log(name.textContent);
+  if(language === `en-US`) {
+    name.textContent = `Name:`
+    surname.textContent = `Surname:`
+    dob.textContent = `Date of birth:`
+    btn.textContent = `Save:`
+  }
+
+  if(language === 'sr') {
+    name.textContent = `Ime:`
+    surname.textContent = `Prezime:`
+    dob.textContent = `Datum Rodjenja:`
+    btn.textContent = `sacuvaj`
+  }
 }
 
-form.addEventListener("submit", function (event) {
-  const firstName = document.getElementById("name");
-  const surname = document.getElementById("surname");
-  const dob = document.getElementById("dob");
-  const message = document.querySelector(".form__message");
-
-  event.preventDefault();
-
-  // message.style.display = "block";
-  // message.textContent = `
-  // successfully sent!
-  // Name: ${firstName.value};
-  // Surname: ${surname.value};
-  // Date Of Birth: ${dob.value};
-  // `;
-
-  window.location =`information.html?firstName=${firstName.value}&surname=${surname.value}&date=${dob.value}`;
-
-  init();
-});
+browserlanguage();
