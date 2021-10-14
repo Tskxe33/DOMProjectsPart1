@@ -21,20 +21,18 @@ function browserlanguage(){
   const dob = document.querySelector('.dob');
   const btn = document.querySelector('.btn');
   const language = navigator.language;
-  console.log(language === `sr`);
-  console.log(name.textContent);
   if(language === `en-US`) {
     name.textContent = `Name:`
     surname.textContent = `Surname:`
     dob.textContent = `Date of birth:`
-    btn.textContent = `Save:`
+    btn.textContent = `Save`
   }
 
   if(language === 'sr') {
     name.textContent = `Ime:`
     surname.textContent = `Prezime:`
     dob.textContent = `Datum Rodjenja:`
-    btn.textContent = `sacuvaj`
+    btn.textContent = `Sacuvaj`
   }
 }
 
