@@ -2,6 +2,31 @@
 
 const form = document.querySelector(".form");
 
+const quotesObjects = {
+  quotes: [
+    {
+      quote: `You’ve got to start with the customer experience and work back toward the technology`,
+      author: `Steve Jobs`,
+    },
+    {
+      quote: `Any product that needs a manual to work is broken.`,
+      author: `Alan Musk`,
+    },
+    {
+      quote: `Quality in a product or service is not what the supplier puts in. it is what the customer gets out and is willing to pay for.`,
+      author: `Peter Drucker`,
+    },
+    {
+      quote: `When the product is right, you don’t have to be a great Marketer.`,
+      author: `Lee Iacocca`,
+    },
+    {
+      quote: `The sales department isn’t the whole company, but the whole company better be the sales department.`,
+      author: `Philip Kotler`,
+    }
+  ]
+}
+
 if(!document.cookie){
   saveCookie('lang', navigator.language);
   saveCookie('count', 0);
@@ -22,12 +47,6 @@ function getCookieValue(cookieName) {
      }
   return cookie;
 }
-
-
-
-console.log(getCookieValue(`lang`));
-console.log(getCookieValue(`count`));
-
 
 function cookieCountIncrese(cookieName){
   let count = getCookieValue(cookieName) || 0;
@@ -50,10 +69,11 @@ form.addEventListener("submit", function (event) {
   query.set("numOfSave", `${cookieValue}`);
 
   location = `information.html?${query}`;
+
 });
 
 
-document.getElementById('form__lang').addEventListener('change',function(e){
+function selectedLanguage(){
   const selectedLang = document.getElementById('form__lang').value;
   saveCookie('lang',selectedLang)
   switch(selectedLang){
@@ -66,7 +86,10 @@ document.getElementById('form__lang').addEventListener('change',function(e){
       break;      
     }
   }
-})
+}
+
+
+document.getElementById('form__lang').addEventListener('change', selectedLanguage);
 
 // ----------- LANGUAGES -----------
 function translateToEnglish(){
@@ -74,7 +97,6 @@ function translateToEnglish(){
   const surname = document.querySelector(".surname");
   const dob = document.querySelector(".dob");
   const btn = document.querySelector(".btn");
-  const language = navigator.language;
   name.textContent = `Name:`;
   surname.textContent = `Surname:`;
   dob.textContent = `Date of birth:`;
@@ -87,7 +109,6 @@ function translateToSerbian(){
   const surname = document.querySelector(".surname");
   const dob = document.querySelector(".dob");
   const btn = document.querySelector(".btn");
-  const language = navigator.language;
 
   name.textContent = `Ime:`;
   surname.textContent = `Prezime:`;
@@ -96,12 +117,9 @@ function translateToSerbian(){
 }
 
 
+
 // ----- browser default language ------
 function browserlanguage() {
-  // const name = document.querySelector(".name");
-  // const surname = document.querySelector(".surname");
-  // const dob = document.querySelector(".dob");
-  // const btn = document.querySelector(".btn");
   const language = navigator.language;
   if (language === `en-US`) {
     translateToEnglish();
@@ -113,3 +131,8 @@ function browserlanguage() {
 }
 
 browserlanguage();
+
+// -------------- QUOTES -------------------
+
+function displayRandomQuote(){
+}
