@@ -17,6 +17,10 @@ body {
   font-weight: 400;
   line-height: 1.7;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .hidden {
@@ -25,10 +29,6 @@ body {
 
 .form {
   font-size: 2.1rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 30%;
 }
 
@@ -91,4 +91,24 @@ body {
 .info__dob,
 .info__numOfSave {
   font-size: 2.4rem;
+}
+
+.lang__select{
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  outline: none;
+  background-color: #34495e;
+  color: #fff;
+
+}
+
+.quotes{
+  margin-top: 2rem;
+  font-size: 2rem;
+}
+
+
+.quotes__author{
+  text-align: center;
 }
