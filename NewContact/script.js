@@ -2,18 +2,46 @@
 
 const form = document.querySelector(".form");
 
+if(!document.cookie){
+  saveCookie('lang', navigator.language);
+  saveCookie('count', 0);
+}
+
 function saveCookie(name, value) {
   document.cookie = `${name}=${value}`;
 }
 
+function getCookieValue(cookieName) {
+  let cookie = document.cookie
+     .split("; ")
+     .find((name) => name.startsWith(cookieName))
+     .split("=")[1];
 
+     if(cookieName === `count`){
+       cookie = Number(cookie)
+     }
+  return cookie;
+}
+
+
+
+console.log(getCookieValue(`lang`));
+console.log(getCookieValue(`count`));
+
+
+function cookieCountIncrese(cookieName){
+  let count = getCookieValue(cookieName) || 0;
+  count++
+  return count; 
+}
+
+console.log(cookieCountIncrese(`count`));
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
-  let cookieValue = +document.cookie.split("=")[1];
-  console.log(cookieValue);
-  saveCookie(`count`, ++cookieValue);
 
+  let cookieValue = cookieCountIncrese(`count`);
+  saveCookie(`count`,cookieValue);
   const formElements = event.target.elements;
   const query = new URLSearchParams();
   query.set("Name", `${formElements[`name`].value}`);
@@ -27,8 +55,7 @@ form.addEventListener("submit", function (event) {
 
 document.getElementById('form__lang').addEventListener('change',function(e){
   const selectedLang = document.getElementById('form__lang').value;
-  // saveCookie('lang', selectedLang);
-
+  saveCookie('lang',selectedLang)
   switch(selectedLang){
     case 'sr': {
       translateToSerbian();
@@ -36,8 +63,7 @@ document.getElementById('form__lang').addEventListener('change',function(e){
     }
     case 'en-US': {
       translateToEnglish();
-      break;
-
+      break;      
     }
   }
 })

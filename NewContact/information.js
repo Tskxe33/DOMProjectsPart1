@@ -6,7 +6,7 @@ if (FirstName) {
 const dob = query.get("Dob");
 const surname = query.get("Surname");
 const numOfSave = query.get("numOfSave");
-console.log(numOfSave);
+console.log(surname, numOfSave);
 
 document.querySelector(".info__name").textContent = `First Name: ${FirstName}`;
 
