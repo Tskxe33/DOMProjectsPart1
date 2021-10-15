@@ -6,7 +6,7 @@ function saveCookie(name, value) {
   document.cookie = `${name}=${value}`;
 }
 
-console.log(+document.cookie.split("=")[1]);
+
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -24,24 +24,65 @@ form.addEventListener("submit", function (event) {
   location = `information.html?${query}`;
 });
 
-function browserlanguage() {
+
+document.getElementById('form__lang').addEventListener('change',function(e){
+  const selectedLang = document.getElementById('form__lang').value;
+  // saveCookie('lang', selectedLang);
+
+  switch(selectedLang){
+    case 'sr': {
+      translateToSerbian();
+      break;
+    }
+    case 'en-US': {
+      translateToEnglish();
+      break;
+
+    }
+  }
+})
+
+// ----------- LANGUAGES -----------
+function translateToEnglish(){
   const name = document.querySelector(".name");
   const surname = document.querySelector(".surname");
   const dob = document.querySelector(".dob");
   const btn = document.querySelector(".btn");
   const language = navigator.language;
+  name.textContent = `Name:`;
+  surname.textContent = `Surname:`;
+  dob.textContent = `Date of birth:`;
+  btn.textContent = `Save`;
+}
+
+
+function translateToSerbian(){
+  const name = document.querySelector(".name");
+  const surname = document.querySelector(".surname");
+  const dob = document.querySelector(".dob");
+  const btn = document.querySelector(".btn");
+  const language = navigator.language;
+
+  name.textContent = `Ime:`;
+  surname.textContent = `Prezime:`;
+  dob.textContent = `Datum Rodjenja:`;
+  btn.textContent = `Sacuvaj`;
+}
+
+
+// ----- browser default language ------
+function browserlanguage() {
+  // const name = document.querySelector(".name");
+  // const surname = document.querySelector(".surname");
+  // const dob = document.querySelector(".dob");
+  // const btn = document.querySelector(".btn");
+  const language = navigator.language;
   if (language === `en-US`) {
-    name.textContent = `Name:`;
-    surname.textContent = `Surname:`;
-    dob.textContent = `Date of birth:`;
-    btn.textContent = `Save`;
+    translateToEnglish();
   }
 
   if (language === "sr") {
-    name.textContent = `Ime:`;
-    surname.textContent = `Prezime:`;
-    dob.textContent = `Datum Rodjenja:`;
-    btn.textContent = `Sacuvaj`;
+      translateToSerbian();
   }
 }
 
