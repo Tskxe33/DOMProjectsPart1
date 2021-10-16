@@ -1,31 +1,31 @@
 "use strict";
 
-const form = document.querySelector(".form");
+// const quotesObjects = {
+//   quotes: [
+//     {
+//       quote: `You’ve got to start with the customer experience and work back toward the technology`,
+//       author: `Steve Jobs`,
+//     },
+//     {
+//       quote: `Any product that needs a manual to work is broken.`,
+//       author: `Alan Musk`,
+//     },
+//     {
+//       quote: `Quality in a product or service is not what the supplier puts in. it is what the customer gets out and is willing to pay for.`,
+//       author: `Peter Drucker`,
+//     },
+//     {
+//       quote: `When the product is right, you don’t have to be a great Marketer.`,
+//       author: `Lee Iacocca`,
+//     },
+//     {
+//       quote: `The sales department isn’t the whole company, but the whole company better be the sales department.`,
+//       author: `Philip Kotler`,
+//     },
+//   ],
+// };
 
-const quotesObjects = {
-  quotes: [
-    {
-      quote: `You’ve got to start with the customer experience and work back toward the technology`,
-      author: `Steve Jobs`,
-    },
-    {
-      quote: `Any product that needs a manual to work is broken.`,
-      author: `Alan Musk`,
-    },
-    {
-      quote: `Quality in a product or service is not what the supplier puts in. it is what the customer gets out and is willing to pay for.`,
-      author: `Peter Drucker`,
-    },
-    {
-      quote: `When the product is right, you don’t have to be a great Marketer.`,
-      author: `Lee Iacocca`,
-    },
-    {
-      quote: `The sales department isn’t the whole company, but the whole company better be the sales department.`,
-      author: `Philip Kotler`,
-    },
-  ],
-};
+const form = document.querySelector(".form");
 
 if (!document.cookie) {
   saveCookie("lang", navigator.language);
@@ -69,48 +69,74 @@ form.addEventListener("submit", function (event) {
   location = `information.html?${query}`;
 });
 
-function selectedLanguage() {
-  const selectedLang = document.getElementById("form__lang").value;
-  saveCookie("lang", selectedLang);
-  switch (selectedLang) {
-    case "sr": {
-      translateToSerbian();
-      break;
-    }
-    case "en-US": {
-      translateToEnglish();
-      break;
-    }
-  }
+// ------------- FETCH TRANSLATIONS ---------------
+
+function fetchTranslations() {
+  const translationsURL = "./translations.json";
+  return fetch(translationsURL)
+    .then((res) => res.json())
+    .then((res) => {
+      const selectedLang = document.getElementById("form__lang").value;
+      return res.languages.filter((lang) => {
+        if (lang.lang === selectedLang) {
+          saveCookie("lang", selectedLang);
+          const name = document.querySelector(".name");
+          const surname = document.querySelector(".surname");
+          const dob = document.querySelector(".dob");
+          const btn = document.querySelector(".btn");
+          name.textContent = lang.name;
+          surname.textContent = lang.surname;
+          dob.textContent = lang.dob;
+          btn.textContent = lang.btn;
+        }
+      });
+    });
 }
+
+fetchTranslations();
+
+// ----------- LANGUAGES -----------
+
+// function translateToEnglish() {
+//   const name = document.querySelector(".name");
+//   const surname = document.querySelector(".surname");
+//   const dob = document.querySelector(".dob");
+//   const btn = document.querySelector(".btn");
+//   name.textContent = FirstName;
+//   surname.textContent = lastName;
+//   dob.textContent = dateOfBirth;
+//   btn.textContent = saveBtn;
+// }
+
+// function translateToSerbian() {
+//   const name = document.querySelector(".name");
+//   const surname = document.querySelector(".surname");
+//   const dob = document.querySelector(".dob");
+//   const btn = document.querySelector(".btn");
+
+//   name.textContent = `Ime:`;
+//   surname.textContent = `Prezime:`;
+//   dob.textContent = `Datum Rodjenja:`;
+//   btn.textContent = `Sacuvaj`;
+// }
+
+// function selectedLanguage() {
+//   const selectedLang = document.getElementById("form__lang").value;
+//   switch (selectedLang) {
+//     case "sr": {
+//       translateToSerbian();
+//       break;
+//     }
+//     case "en-US": {
+//       translateToEnglish();
+//       break;
+//     }
+//   }
+// }
 
 document
   .getElementById("form__lang")
-  .addEventListener("change", selectedLanguage);
-
-// ----------- LANGUAGES -----------
-function translateToEnglish() {
-  const name = document.querySelector(".name");
-  const surname = document.querySelector(".surname");
-  const dob = document.querySelector(".dob");
-  const btn = document.querySelector(".btn");
-  name.textContent = `Name:`;
-  surname.textContent = `Surname:`;
-  dob.textContent = `Date of birth:`;
-  btn.textContent = `Save`;
-}
-
-function translateToSerbian() {
-  const name = document.querySelector(".name");
-  const surname = document.querySelector(".surname");
-  const dob = document.querySelector(".dob");
-  const btn = document.querySelector(".btn");
-
-  name.textContent = `Ime:`;
-  surname.textContent = `Prezime:`;
-  dob.textContent = `Datum Rodjenja:`;
-  btn.textContent = `Sacuvaj`;
-}
+  .addEventListener("change", fetchTranslations);
 
 // ----- browser default language ------
 function browserlanguage() {
