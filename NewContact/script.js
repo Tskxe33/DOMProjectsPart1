@@ -23,13 +23,13 @@ const quotesObjects = {
     {
       quote: `The sales department isn’t the whole company, but the whole company better be the sales department.`,
       author: `Philip Kotler`,
-    }
-  ]
-}
+    },
+  ],
+};
 
-if(!document.cookie){
-  saveCookie('lang', navigator.language);
-  saveCookie('count', 0);
+if (!document.cookie) {
+  saveCookie("lang", navigator.language);
+  saveCookie("count", 0);
 }
 
 function saveCookie(name, value) {
@@ -38,29 +38,27 @@ function saveCookie(name, value) {
 
 function getCookieValue(cookieName) {
   let cookie = document.cookie
-     .split("; ")
-     .find((name) => name.startsWith(cookieName))
-     .split("=")[1];
+    .split("; ")
+    .find((name) => name.startsWith(cookieName))
+    .split("=")[1];
 
-     if(cookieName === `count`){
-       cookie = Number(cookie)
-     }
+  if (cookieName === `count`) {
+    cookie = Number(cookie);
+  }
   return cookie;
 }
 
-function cookieCountIncrese(cookieName){
+function cookieCountIncrese(cookieName) {
   let count = getCookieValue(cookieName) || 0;
-  count++
-  return count; 
+  count++;
+  return count;
 }
-
-console.log(cookieCountIncrese(`count`));
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
   let cookieValue = cookieCountIncrese(`count`);
-  saveCookie(`count`,cookieValue);
+  saveCookie(`count`, cookieValue);
   const formElements = event.target.elements;
   const query = new URLSearchParams();
   query.set("Name", `${formElements[`name`].value}`);
@@ -69,30 +67,29 @@ form.addEventListener("submit", function (event) {
   query.set("numOfSave", `${cookieValue}`);
 
   location = `information.html?${query}`;
-
 });
 
-
-function selectedLanguage(){
-  const selectedLang = document.getElementById('form__lang').value;
-  saveCookie('lang',selectedLang)
-  switch(selectedLang){
-    case 'sr': {
+function selectedLanguage() {
+  const selectedLang = document.getElementById("form__lang").value;
+  saveCookie("lang", selectedLang);
+  switch (selectedLang) {
+    case "sr": {
       translateToSerbian();
       break;
     }
-    case 'en-US': {
+    case "en-US": {
       translateToEnglish();
-      break;      
+      break;
     }
   }
 }
 
-
-document.getElementById('form__lang').addEventListener('change', selectedLanguage);
+document
+  .getElementById("form__lang")
+  .addEventListener("change", selectedLanguage);
 
 // ----------- LANGUAGES -----------
-function translateToEnglish(){
+function translateToEnglish() {
   const name = document.querySelector(".name");
   const surname = document.querySelector(".surname");
   const dob = document.querySelector(".dob");
@@ -103,8 +100,7 @@ function translateToEnglish(){
   btn.textContent = `Save`;
 }
 
-
-function translateToSerbian(){
+function translateToSerbian() {
   const name = document.querySelector(".name");
   const surname = document.querySelector(".surname");
   const dob = document.querySelector(".dob");
@@ -116,8 +112,6 @@ function translateToSerbian(){
   btn.textContent = `Sacuvaj`;
 }
 
-
-
 // ----- browser default language ------
 function browserlanguage() {
   const language = navigator.language;
@@ -126,7 +120,7 @@ function browserlanguage() {
   }
 
   if (language === "sr") {
-      translateToSerbian();
+    translateToSerbian();
   }
 }
 
@@ -134,5 +128,35 @@ browserlanguage();
 
 // -------------- QUOTES -------------------
 
-function displayRandomQuote(){
+let load = true;
+
+function getRandomQuote() {
+  const random = Math.trunc(Math.random() * quotesObjects.quotes.length);
+  return quotesObjects.quotes.filter((quote, index) =>
+    index === random ? quote : ""
+  );
+}
+
+function delay() {
+  const loader = document.querySelector(".loader");
+  return new Promise(function (resolve, reject) {
+    load && loader.classList.remove("hidden");
+    resolve();
+  });
+}
+
+delay().then(function () {
+  const loader = document.querySelector(".loader");
+
+  setInterval(function () {
+    const quote = getRandomQuote()[0];
+
+    displayQuote(quote.quote, quote.author);
+    load && loader.classList.add("hidden");
+  }, 2500);
+});
+
+function displayQuote(quote, author) {
+  document.querySelector(".quotes__message").textContent = quote;
+  document.querySelector(".quotes__author").textContent = author;
 }
