@@ -128,33 +128,97 @@ browserlanguage();
 
 // -------------- QUOTES -------------------
 
-let load = true;
+// ------------------------------------
+// ------------ VERSION 1 WITH Promise() -----------------------
+// --------------------------------------
+// let load = true;
 
-function getRandomQuote() {
-  const random = Math.trunc(Math.random() * quotesObjects.quotes.length);
-  return quotesObjects.quotes.filter((quote, index) =>
-    index === random ? quote : ""
-  );
+// function getRandomQuote() {
+//   const random = Math.trunc(Math.random() * quotesObjects.quotes.length);
+//   return quotesObjects.quotes.filter((quote, index) =>
+//     index === random ? quote : ""
+//   );
+// }
+
+// function delay() {
+//   const loader = document.querySelector(".loader");
+//   return new Promise(function (resolve, reject) {
+//     load && loader.classList.remove("hidden");
+//     resolve();
+//   });
+// }
+
+// delay().then(function () {
+//   const loader = document.querySelector(".loader");
+
+//   setInterval(function () {
+//     const quote = getRandomQuote()[0];
+
+//     displayQuote(quote.quote, quote.author);
+//     load && loader.classList.add("hidden");
+//   }, 2500);
+// });
+
+// function displayQuote(quote, author) {
+//   document.querySelector(".quotes__message").textContent = quote;
+//   document.querySelector(".quotes__author").textContent = author;
+// }
+
+// ------------------------------------
+// ------------ VERSION 2 WITH Fetch() -----------------------
+// --------------------------------------
+
+function fetchQuotes() {
+  const quotesURL = "quotes.json";
+  return fetch(quotesURL).then((response) => response.json());
 }
 
-function delay() {
+function getRandomQuote() {
   const loader = document.querySelector(".loader");
-  return new Promise(function (resolve, reject) {
-    load && loader.classList.remove("hidden");
-    resolve();
+  return fetchQuotes().then((res) => {
+    loader.classList.remove("hidden");
+    const random = Math.trunc(Math.random() * res.quotes.length);
+    return res.quotes.filter((quote, index) => (index === random ? quote : ""));
   });
 }
 
-delay().then(function () {
+// console.log(getRandomQuote().then((res) => console.log(res)));
+
+setInterval(function () {
   const loader = document.querySelector(".loader");
 
-  setInterval(function () {
-    const quote = getRandomQuote()[0];
-
+  getRandomQuote().then((res) => {
+    const quote = res[0];
     displayQuote(quote.quote, quote.author);
-    load && loader.classList.add("hidden");
-  }, 2500);
+    loader.classList.add("hidden");
+  });
+}, 2500);
+getRandomQuote().then((res) => {
+  // setInterval(function () {
+  //   const quote = res[0];
+  //   // displayQuote(quote.quote, quote.author);
+  //   // load && loader.classList.add("hidden");
+  // }, 2500);
 });
+
+// function delay() {
+//   const loader = document.querySelector(".loader");
+//   return new Promise(function (resolve, reject) {
+//     load && loader.classList.remove("hidden");
+//     resolve();
+//   });
+// }
+
+// delay().then(function () {
+//   const loader = document.querySelector(".loader");
+
+//   setInterval(function () {
+//     const quote = getRandomQuote()[0];
+
+//     displayQuote(quote.quote, quote.author);
+//     load && loader.classList.add("hidden");
+//   }, 2500);
+// });
 
 function displayQuote(quote, author) {
   document.querySelector(".quotes__message").textContent = quote;
