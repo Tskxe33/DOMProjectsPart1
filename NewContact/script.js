@@ -174,15 +174,15 @@ function fetchQuotes() {
 }
 
 function getRandomQuote() {
-  const loader = document.querySelector(".loader");
   return fetchQuotes().then((res) => {
+    const loader = document.querySelector(".loader");
     loader.classList.remove("hidden");
     const random = Math.trunc(Math.random() * res.quotes.length);
     return res.quotes.filter((quote, index) => (index === random ? quote : ""));
   });
 }
 
-// console.log(getRandomQuote().then((res) => console.log(res)));
+getRandomQuote();
 
 setInterval(function () {
   const loader = document.querySelector(".loader");
@@ -193,32 +193,6 @@ setInterval(function () {
     loader.classList.add("hidden");
   });
 }, 2500);
-getRandomQuote().then((res) => {
-  // setInterval(function () {
-  //   const quote = res[0];
-  //   // displayQuote(quote.quote, quote.author);
-  //   // load && loader.classList.add("hidden");
-  // }, 2500);
-});
-
-// function delay() {
-//   const loader = document.querySelector(".loader");
-//   return new Promise(function (resolve, reject) {
-//     load && loader.classList.remove("hidden");
-//     resolve();
-//   });
-// }
-
-// delay().then(function () {
-//   const loader = document.querySelector(".loader");
-
-//   setInterval(function () {
-//     const quote = getRandomQuote()[0];
-
-//     displayQuote(quote.quote, quote.author);
-//     load && loader.classList.add("hidden");
-//   }, 2500);
-// });
 
 function displayQuote(quote, author) {
   document.querySelector(".quotes__message").textContent = quote;
