@@ -1,0 +1,18 @@
+{
+  "languages": [
+    {
+      "lang": "sr",
+      "name": "Ime:",
+      "surname": "Prezime:",
+      "dob": "Datum rodjenja:",
+      "btn": "Sacuvaj"
+    },
+    {
+      "lang": "en-US",
+      "name": "First Name:",
+      "surname": "Last Name:",
+      "dob": "Date of Birth:",
+      "btn": "Save"
+    }
+  ]
+}
