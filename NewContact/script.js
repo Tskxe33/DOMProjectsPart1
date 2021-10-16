@@ -77,17 +77,11 @@ function fetchTranslations() {
     .then((res) => res.json())
     .then((res) => {
       const selectedLang = document.getElementById("form__lang").value;
+
       return res.languages.filter((lang) => {
         if (lang.lang === selectedLang) {
           saveCookie("lang", selectedLang);
-          const name = document.querySelector(".name");
-          const surname = document.querySelector(".surname");
-          const dob = document.querySelector(".dob");
-          const btn = document.querySelector(".btn");
-          name.textContent = lang.name;
-          surname.textContent = lang.surname;
-          dob.textContent = lang.dob;
-          btn.textContent = lang.btn;
+          setTranslations(lang.name, lang.surname, lang.dob, lang.btn);
         }
       });
     });
@@ -95,62 +89,36 @@ function fetchTranslations() {
 
 fetchTranslations();
 
+function setTranslations(firstName, lastName, dateOfBirth, SaveBtn) {
+  const name = document.querySelector(".name");
+  const surname = document.querySelector(".surname");
+  const dob = document.querySelector(".dob");
+  const btn = document.querySelector(".btn");
+  name.textContent = firstName;
+  surname.textContent = lastName;
+  dob.textContent = dateOfBirth;
+  btn.textContent = SaveBtn;
+}
+
 // ----------- LANGUAGES -----------
-
-// function translateToEnglish() {
-//   const name = document.querySelector(".name");
-//   const surname = document.querySelector(".surname");
-//   const dob = document.querySelector(".dob");
-//   const btn = document.querySelector(".btn");
-//   name.textContent = FirstName;
-//   surname.textContent = lastName;
-//   dob.textContent = dateOfBirth;
-//   btn.textContent = saveBtn;
-// }
-
-// function translateToSerbian() {
-//   const name = document.querySelector(".name");
-//   const surname = document.querySelector(".surname");
-//   const dob = document.querySelector(".dob");
-//   const btn = document.querySelector(".btn");
-
-//   name.textContent = `Ime:`;
-//   surname.textContent = `Prezime:`;
-//   dob.textContent = `Datum Rodjenja:`;
-//   btn.textContent = `Sacuvaj`;
-// }
-
-// function selectedLanguage() {
-//   const selectedLang = document.getElementById("form__lang").value;
-//   switch (selectedLang) {
-//     case "sr": {
-//       translateToSerbian();
-//       break;
-//     }
-//     case "en-US": {
-//       translateToEnglish();
-//       break;
-//     }
-//   }
-// }
 
 document
   .getElementById("form__lang")
   .addEventListener("change", fetchTranslations);
 
 // ----- browser default language ------
-function browserlanguage() {
-  const language = navigator.language;
-  if (language === `en-US`) {
-    translateToEnglish();
-  }
+// function browserlanguage() {
+//   const language = navigator.language;
+//   if (language === `en-US`) {
+//     setTranslations("First Name", "Last Name", "Date of Birth", "Save");
+//   }
 
-  if (language === "sr") {
-    translateToSerbian();
-  }
-}
+//   if (language === "sr") {
+//     setTranslations("Ime", "Prezime", "Datum rodjenja", "Sačuvaj");
+//   }
+// }
 
-browserlanguage();
+// browserlanguage();
 
 // -------------- QUOTES -------------------
 
