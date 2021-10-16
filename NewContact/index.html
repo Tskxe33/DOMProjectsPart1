@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="loader.css" />
     <title>Contact Form</title>
   </head>
   <body>
-    <form method="GET" class="form ">
+    <form method="GET" class="form">
       <div class="form__group">
         <label for="name" class="form__label name"></label>
         <input type="text" id="name" name="name" class="form__input" />
@@ -25,13 +26,14 @@
     </form>
 
     <select name="lang" id="form__lang" class="lang__select">
-      <option value='en-US' class="lang__option">English</option>
-      <option value='sr' class="lang__option">Serbian</option>
+      <option value="en-US" class="lang__option">English</option>
+      <option value="sr" class="lang__option">Serbian</option>
     </select>
 
+    <div class="loader hidden">Loading...</div>
     <div class="quotes">
-      <p class="quotes__message">You’ve got to start with the customer experience and work back toward the technology</p>
-      <p class="quotes__author">Steve jobs</p>
+      <p class="quotes__message"></p>
+      <p class="quotes__author"></p>
     </div>
     <script src="script.js" defer></script>
   </body>
