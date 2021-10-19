@@ -1,7 +1,6 @@
 "use strict";
-
+let cookie;
 const form = document.querySelector(".form");
-
 if (!document.cookie) {
   // saveCookie("lang", navigator.language);
   saveCookie("count", 0);
@@ -62,6 +61,7 @@ function fetchTranslations() {
                 lang.selectLang
               )
             : "";
+          cookie = navigator.language;
           saveCookie("lang", navigator.language);
         } else if (lang.lang === selectedLang) {
           setTranslations(
@@ -102,22 +102,7 @@ function setTranslations(
 
 document.getElementById("form__lang").addEventListener("change", function () {
   fetchTranslations();
-  saveCookie("lang", getCookieValue("lang"));
 });
-
-// ----- browser default language ------
-// function browserlanguage() {
-//   const language = navigator.language;
-//   if (language === `en-US`) {
-//     setTranslations("First Name", "Last Name", "Date of Birth", "Save");
-//   }
-
-//   if (language === "sr") {
-//     setTranslations("Ime", "Prezime", "Datum rodjenja", "Sačuvaj");
-//   }
-// }
-
-// browserlanguage();
 
 // -------------- QUOTES -------------------
 
