@@ -42,7 +42,7 @@ function getCookieValue(cookieName) {
     .find((name) => name.startsWith(cookieName))
     .split("=")[1];
 
-  if (cookieName === `count`) {
+  if (cookieName === `count`) { // premestiti if
     cookie = Number(cookie);
   }
   return cookie;
@@ -78,9 +78,9 @@ function fetchTranslations() {
     .then((res) => {
       const selectedLang = document.getElementById("form__lang").value;
 
-      return res.languages.filter((lang) => {
+      return res.languages.filter((lang) => { //umesto filter find
         if (lang.lang === selectedLang) {
-          saveCookie("lang", selectedLang);
+          saveCookie("lang", selectedLang); //cookie izbaciti
           setTranslations(lang.name, lang.surname, lang.dob, lang.btn);
         }
       });
