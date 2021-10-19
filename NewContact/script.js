@@ -1,33 +1,17 @@
 "use strict";
+import * as cookie from "./modules/cookies.js";
+
 const form = document.querySelector(".form");
+
 if (!document.cookie) {
-  saveCookie("count", 0);
-}
-
-function saveCookie(name, value) {
-  document.cookie = `${name}=${value}`;
-}
-
-function getCookieValue(cookieName) {
-  let cookie = document.cookie
-    .split("; ")
-    .find((name) => name.startsWith(cookieName))
-    .split("=")[1];
-
-  return cookie;
-}
-
-function cookieCountIncrese(cookieName) {
-  let count = getCookieValue(cookieName) || 0;
-  count++;
-  return count;
+  cookie.saveCookie("count", 0);
 }
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  let cookieValue = cookieCountIncrese(`count`);
-  saveCookie(`count`, cookieValue);
+  let cookieValue = cookie.cookieCountIncrese(`count`);
+  cookie.saveCookie(`count`, cookieValue);
   const formElements = event.target.elements;
   const query = new URLSearchParams();
   query.set("Name", `${formElements[`name`].value}`);
@@ -99,56 +83,15 @@ document.getElementById("form__lang").addEventListener("change", function () {
   const selectedLang = document.getElementById("form__lang").value;
 
   selectedLang === `chooseLang`
-    ? saveCookie("lang", navigator.language)
-    : saveCookie("lang", selectedLang);
+    ? cookie.saveCookie("lang", navigator.language)
+    : cookie.saveCookie("lang", selectedLang);
 
   fetchTranslations();
 });
 
 // -------------- QUOTES -------------------
 
-// ------------------------------------
-// ------------ VERSION 1 WITH Promise() -----------------------
-// --------------------------------------
-// let load = true;
-
-// function getRandomQuote() {
-//   const random = Math.trunc(Math.random() * quotesObjects.quotes.length);
-//   return quotesObjects.quotes.filter((quote, index) =>
-//     index === random ? quote : ""
-//   );
-// }
-
-// function delay() {
-//   const loader = document.querySelector(".loader");
-//   return new Promise(function (resolve, reject) {
-//     load && loader.classList.remove("hidden");
-//     resolve();
-//   });
-// }
-
-// delay().then(function () {
-//   const loader = document.querySelector(".loader");
-
-//   setInterval(function () {
-//     const quote = getRandomQuote()[0];
-
-//     displayQuote(quote.quote, quote.author);
-//     load && loader.classList.add("hidden");
-//   }, 2500);
-// });
-
-// function displayQuote(quote, author) {
-//   document.querySelector(".quotes__message").textContent = quote;
-//   document.querySelector(".quotes__author").textContent = author;
-// }
-
-// ------------------------------------
-// ------------ VERSION 2 WITH Fetch() -----------------------
-// --------------------------------------
-
 function fetchQuotes() {
-  // const quotesURL = "quotes.json";
   const quotesURL = "https://type.fit/api/quotes";
   return fetch(quotesURL).then((response) => response.json());
 }
