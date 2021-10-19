@@ -163,7 +163,8 @@ document
 // --------------------------------------
 
 function fetchQuotes() {
-  const quotesURL = "quotes.json";
+  // const quotesURL = "quotes.json";
+  const quotesURL = "https://type.fit/api/quotes";
   return fetch(quotesURL).then((response) => response.json());
 }
 
@@ -171,19 +172,19 @@ function getRandomQuote() {
   return fetchQuotes().then((res) => {
     const loader = document.querySelector(".loader");
     loader.classList.remove("hidden");
-    const random = Math.trunc(Math.random() * res.quotes.length);
-    return res.quotes.filter((quote, index) => (index === random ? quote : ""));
+    const random = Math.trunc(Math.random() * res.length);
+    return res.filter((quote, index) => (index === random ? quote : ""));
   });
 }
 
 getRandomQuote();
 
-setInterval(function () {
+setTimeout(function () {
   const loader = document.querySelector(".loader");
 
   getRandomQuote().then((res) => {
     const quote = res[0];
-    displayQuote(quote.quote, quote.author);
+    displayQuote(quote.text, quote.author);
     loader.classList.add("hidden");
   });
 }, 2500);
