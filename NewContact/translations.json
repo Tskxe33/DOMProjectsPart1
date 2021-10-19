@@ -5,14 +5,24 @@
       "name": "Ime:",
       "surname": "Prezime:",
       "dob": "Datum Rodjenja:",
-      "btn": "Sačuvaj"
+      "btn": "Sačuvaj",
+      "selectLang": "Podrazumevani jezik"
     },
     {
       "lang": "en-US",
       "name": "First Name:",
       "surname": "Last Name:",
       "dob": "Date of Birth:",
-      "btn": "Save"
+      "btn": "Save",
+      "selectLang": "Default language"
+    },
+    {
+      "lang": "de",
+      "name": "Vorname:",
+      "surname": "Nachname:",
+      "dob": "Geburtsdatum:",
+      "btn": "speichern",
+      "selectLang": "Standardsprache"
     }
   ]
 }
