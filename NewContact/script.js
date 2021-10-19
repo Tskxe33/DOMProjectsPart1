@@ -1,34 +1,9 @@
 "use strict";
 
-// const quotesObjects = {
-//   quotes: [
-//     {
-//       quote: `You’ve got to start with the customer experience and work back toward the technology`,
-//       author: `Steve Jobs`,
-//     },
-//     {
-//       quote: `Any product that needs a manual to work is broken.`,
-//       author: `Alan Musk`,
-//     },
-//     {
-//       quote: `Quality in a product or service is not what the supplier puts in. it is what the customer gets out and is willing to pay for.`,
-//       author: `Peter Drucker`,
-//     },
-//     {
-//       quote: `When the product is right, you don’t have to be a great Marketer.`,
-//       author: `Lee Iacocca`,
-//     },
-//     {
-//       quote: `The sales department isn’t the whole company, but the whole company better be the sales department.`,
-//       author: `Philip Kotler`,
-//     },
-//   ],
-// };
-
 const form = document.querySelector(".form");
 
 if (!document.cookie) {
-  saveCookie("lang", navigator.language);
+  // saveCookie("lang", navigator.language);
   saveCookie("count", 0);
 }
 
@@ -42,9 +17,6 @@ function getCookieValue(cookieName) {
     .find((name) => name.startsWith(cookieName))
     .split("=")[1];
 
-  if (cookieName === `count`) { // premestiti if
-    cookie = Number(cookie);
-  }
   return cookie;
 }
 
@@ -78,10 +50,28 @@ function fetchTranslations() {
     .then((res) => {
       const selectedLang = document.getElementById("form__lang").value;
 
-      return res.languages.filter((lang) => { //umesto filter find
-        if (lang.lang === selectedLang) {
-          saveCookie("lang", selectedLang); //cookie izbaciti
-          setTranslations(lang.name, lang.surname, lang.dob, lang.btn);
+      return res.languages.find((lang) => {
+        if (selectedLang === "chooseLang") {
+          //chooseLang is default option in select
+          lang.lang === navigator.language
+            ? setTranslations(
+                lang.name,
+                lang.surname,
+                lang.dob,
+                lang.btn,
+                lang.selectLang
+              )
+            : "";
+          saveCookie("lang", navigator.language);
+        } else if (lang.lang === selectedLang) {
+          setTranslations(
+            lang.name,
+            lang.surname,
+            lang.dob,
+            lang.btn,
+            lang.selectLang
+          );
+          saveCookie("lang", selectedLang);
         }
       });
     });
@@ -89,22 +79,31 @@ function fetchTranslations() {
 
 fetchTranslations();
 
-function setTranslations(firstName, lastName, dateOfBirth, SaveBtn) {
+function setTranslations(
+  firstName,
+  lastName,
+  dateOfBirth,
+  SaveBtn,
+  selectLang
+) {
   const name = document.querySelector(".name");
   const surname = document.querySelector(".surname");
   const dob = document.querySelector(".dob");
   const btn = document.querySelector(".btn");
+  const chooseLang = document.querySelector(".choose-lang");
   name.textContent = firstName;
   surname.textContent = lastName;
   dob.textContent = dateOfBirth;
   btn.textContent = SaveBtn;
+  chooseLang.textContent = selectLang;
 }
 
 // ----------- LANGUAGES -----------
 
-document
-  .getElementById("form__lang")
-  .addEventListener("change", fetchTranslations);
+document.getElementById("form__lang").addEventListener("change", function () {
+  fetchTranslations();
+  saveCookie("lang", getCookieValue("lang"));
+});
 
 // ----- browser default language ------
 // function browserlanguage() {
