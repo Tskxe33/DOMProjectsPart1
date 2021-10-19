@@ -1,8 +1,6 @@
 "use strict";
-let cookie;
 const form = document.querySelector(".form");
 if (!document.cookie) {
-  // saveCookie("lang", navigator.language);
   saveCookie("count", 0);
 }
 
@@ -61,8 +59,6 @@ function fetchTranslations() {
                 lang.selectLang
               )
             : "";
-          cookie = navigator.language;
-          saveCookie("lang", navigator.language);
         } else if (lang.lang === selectedLang) {
           setTranslations(
             lang.name,
@@ -71,7 +67,6 @@ function fetchTranslations() {
             lang.btn,
             lang.selectLang
           );
-          saveCookie("lang", selectedLang);
         }
       });
     });
@@ -101,6 +96,12 @@ function setTranslations(
 // ----------- LANGUAGES -----------
 
 document.getElementById("form__lang").addEventListener("change", function () {
+  const selectedLang = document.getElementById("form__lang").value;
+
+  selectedLang === `chooseLang`
+    ? saveCookie("lang", navigator.language)
+    : saveCookie("lang", selectedLang);
+
   fetchTranslations();
 });
 
