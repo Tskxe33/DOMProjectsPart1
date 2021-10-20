@@ -11,8 +11,8 @@ export function getCookieValue(cookieName) {
   return cookie;
 }
 
-export function cookieCountIncrese(cookieName) {
-  let count = getCookieValue(cookieName) || 0;
-  count++;
-  return count;
-}
+// export function cookieCountIncrese(cookieName) {
+//   let count = getCookieValue(cookieName) || 0;
+//   count++;
+//   return count;
+// } // Ovo ide u script
