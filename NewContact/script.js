@@ -44,6 +44,21 @@ form.addEventListener("submit", function (event) {
 
 translations();
 
+// -------------------- QUOTES --------------------
+
+randomQuote().then((res) => {
+  const loader = document.querySelector(".loader");
+  const quote = res[0];
+
+  displayQuote(quote.text, quote.author);
+  loader.classList.add("hidden");
+});
+
+function displayQuote(quote, author) {
+  document.querySelector(".quotes__message").textContent = quote;
+  document.querySelector(".quotes__author").textContent = author;
+}
+
 randomQuote();
 
 document.getElementById("form__lang").addEventListener("change", function () {
