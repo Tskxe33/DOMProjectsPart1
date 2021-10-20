@@ -9,10 +9,28 @@ if (!document.cookie) {
   cookie.saveCookie("count", 0);
 }
 
+// -------------- COOKIES ----------------
+
+function cookieCountIncrese(cookieName) {
+  let count = cookie.getCookieValue(cookieName) || 0;
+  count++;
+  return count;
+}
+
+function yesterday() {
+  const date = new Date();
+  date.setDate(date.getDate() - 1);
+  return date;
+}
+
+function removeCookie(name) {
+  document.cookie = `${name}=; expires=${yesterday().toUTCString()}`;
+}
+
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  let cookieValue = cookie.cookieCountIncrese(`count`);
+  let cookieValue = cookieCountIncrese(`count`);
   cookie.saveCookie(`count`, cookieValue);
   const formElements = event.target.elements;
   const query = new URLSearchParams();
@@ -32,7 +50,7 @@ document.getElementById("form__lang").addEventListener("change", function () {
   const selectedLang = document.getElementById("form__lang").value;
 
   selectedLang === `chooseLang`
-    ? cookie.saveCookie("lang", navigator.language)
+    ? removeCookie(`lang`)
     : cookie.saveCookie("lang", selectedLang);
 
   translations();
