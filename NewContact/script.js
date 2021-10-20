@@ -5,11 +5,11 @@ import { getRandomQuote as randomQuote } from "./modules/fetchQuotes.js";
 
 const form = document.querySelector(".form");
 
+// -------------- COOKIES ----------------
+
 if (!document.cookie) {
   cookie.saveCookie("count", 0);
 }
-
-// -------------- COOKIES ----------------
 
 function cookieCountIncrese(cookieName) {
   let count = cookie.getCookieValue(cookieName) || 0;
@@ -26,6 +26,8 @@ function yesterday() {
 function removeCookie(name) {
   document.cookie = `${name}=; expires=${yesterday().toUTCString()}`;
 }
+
+// ------------- FORM SUBMIT HANDLER ------------------
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -60,6 +62,8 @@ function displayQuote(quote, author) {
 }
 
 randomQuote();
+
+// ----------------- LANGUAGE HANDLER ------------------
 
 document.getElementById("form__lang").addEventListener("change", function () {
   const selectedLang = document.getElementById("form__lang").value;
